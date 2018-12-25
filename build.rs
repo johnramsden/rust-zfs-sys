@@ -7,11 +7,14 @@ use std::path::PathBuf;
 fn main() {
 
     let libs = vec!["libzfs"];
+    let link_libs = vec!["nvpair"];
 
     for l in libs.iter() {
         pkg_config::probe_library(l).unwrap();
     }
-
+    for l in link_libs.iter() {
+        println!("cargo:rustc-link-lib={}", l);
+    }
     // The bindgen::Builder is the main entry point
     // to bindgen, and lets you build up options for
     // the resulting bindings.
@@ -19,6 +22,7 @@ fn main() {
         // The input header we would like to generate
         // bindings for.
         .header("wrapper.h")
+        .trust_clang_mangling(false)
         .clang_arg("-I/usr/include/libzfs")
         .clang_arg("-I/usr/include/libspl")
         // Finish the builder and generate the bindings.
