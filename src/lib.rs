@@ -28,8 +28,6 @@ mod tests {
 
         unsafe {
             let lzc = libzfs_core_init();
-            // lzc_channel_program(c_str_pool.as_ptr(), c_str_program.as_ptr(),
-            //                     instrlimit, memlimit, nvl_ptr, outnvl_ptr_ptr);
         }
     }
 
